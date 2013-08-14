@@ -1,4 +1,4 @@
-//  Hyphen Tamer (0.1)
+//  Hyphen Tamer (0.2)
 //  http://github.com/ericprice/hyphen-tamer
 //  By Eric Price (http://ericprice.cc)
 //  MIT License
@@ -20,13 +20,13 @@
 
     Plugin.prototype = {
         init: function() {
-            this.tame(this.element, this.settings);
+            var pattern = /([A-Z][a-zA-Z0-9-]*[\s]{0,0})/g,
+                before = '<span class="' + this.settings.appliedClass + '">',
+                after = '</span>';
+            this.tame(this.element, this.settings, pattern, before, after);
         },
-        tame: function(targetElement, settings) {
+        tame: function(targetElement, settings, pattern, before, after) {
             $(targetElement).each(function() {
-                var pattern = /([A-Z][a-zA-Z0-9-]*[\s]{0,0})/g;
-                var before = '<span class="' + settings.appliedClass + '">';
-                var after = '</span>';
                 $(this).html($(this).html().replace(pattern, before + '$1' + after));
             });
         }
