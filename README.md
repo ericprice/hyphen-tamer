@@ -4,7 +4,11 @@ Many style guides specify strict rules around what can and cannot be hyphenated.
 
 ### Usage
 
-**Coming soon.** This is a work in progress.
+```javascript
+$('.hyphenated-text').tame({
+    appliedClass: 'no-hyphenation'
+});
+```
 
 ### Limitations
 

@@ -5,9 +5,9 @@
 
 ;(function($, window, document, undefined) {
     
-    var pluginName = 'hyphen-tamer',
+    var pluginName = 'tame',
         defaults = {
-        propertyName: 'value'
+        appliedClass: 'no-hyphenation'
     };
 
     function Plugin(element, options) {
@@ -20,16 +20,15 @@
 
     Plugin.prototype = {
         init: function() {
-            // Place initialization logic here
-            // You already have access to the DOM element and
-            // the options via the instance, e.g. this.element
-            // and this.settings
-            // you can add more functions like the one below and
-            // call them like so: this.yourOtherFunction(this.element, this.settings).
-            console.log('xD');
+            this.tame(this.element, this.settings);
         },
-        yourOtherFunction: function() {
-            // some logic
+        tame: function(targetElement, settings) {
+            $(targetElement).each(function() {
+                var pattern = /([A-Z][a-zA-Z0-9-]*[\s]{0,0})/g;
+                var before = '<span class="' + settings.appliedClass + '">';
+                var after = '</span>';
+                $(this).html($(this).html().replace(pattern, before + '$1' + after));
+            });
         }
     };
 
